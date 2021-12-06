@@ -1,23 +1,28 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, {FC, useState} from 'react';
-import { Formik, Field, Form } from 'formik';
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import MasterList from './json/ref.json'
+import React, {FC, useState, useEffect} from 'react';
+import { useFormik } from 'formik';
+import MasterList from "./utils/ref.json"
 import './app.scss'
 
 const currentVersusRep = nodecg.Replicant("keyPressRef")
-
-interface cameraArray {
-    name:  string
-    camera_index: number
-}
+const masterRefRep: any = nodecg.Replicant("MasterReference")
 
 const app:FC = () => {
-  const [BlueTeam, setBlueTeam] = useState<any>(MasterList)
-  const [OrangeTeam, setOrangeTeam] = useState<any>(MasterList)
-
+  const [MasterRef, setMasterRef] = useState("")
+  useEffect(() => {
+    const fetchMasterListInfo = async () =>{
+			await NodeCG.waitForReplicants(masterRefRep)
+			setMasterRef(masterRefRep.value)
+		}
+    fetchMasterListInfo() 
+  }, [])
+  const [BlueTeam, setBlueTeam] = useState<any>(MasterList[0])
+  const [OrangeTeam, setOrangeTeam] = useState<any>(MasterList[1])
+  
+  console.log(MasterRef)
   function updateRep () {
     const blueArraycopy = Array.from(BlueTeam)
     const OrangeArraycopy = Array.from(OrangeTeam)
@@ -42,19 +47,40 @@ const app:FC = () => {
     setOrangeTeam(items);
   }
 
+  const formik = useFormik({
+     initialValues: {
+       email: '',
+     },
+     onSubmit: values => {
+       alert(JSON.stringify(values, null, 2));
+     },
+   });
+
   return (
     <div className='App'>
+      <form className='player_form' onSubmit={formik.handleSubmit}>
+       <label className='blue_team_player_label' htmlFor="Player1">Player 1</label>
+       <input
+         className="blue_team_player"
+         name="player-1 name"
+         type="text"
+         onChange={formik.handleChange}
+         value={formik.values.email}
+       />
+ 
+       <button className="submit_button" type="submit">Submit</button>
+      </form>
       <div className='draggables'>
         {BlueTeam ?  
             <DragDropContext onDragEnd={handleblueOnDragEnd}>
               <Droppable droppableId="characters">
                 {(provided) => (
                   <ul className="characters" {...provided.droppableProps} ref={provided.innerRef}>
-                    {BlueTeam.map(({name}, index) => (
+                    {BlueTeam.map(({name, camera_index}, index) => (
                         <Draggable key={name} draggableId={name} index={index}>
                           {(provided) => (
                             <li ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
-                              <p>{name}</p>
+                              <p>{name} {camera_index}</p>
                             </li>
                           )}
                         </Draggable>
@@ -70,11 +96,11 @@ const app:FC = () => {
               <Droppable droppableId="characters">
                 {(provided) => (
                   <ul className="characters" {...provided.droppableProps} ref={provided.innerRef}>
-                    {OrangeTeam.map(({name}, index) => (
+                    {OrangeTeam.map(({name, camera_index}, index) => (
                         <Draggable key={name} draggableId={name} index={index}>
                           {(provided) => (
                             <li ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} >
-                              <p>{name}</p>
+                              <p>{name} {camera_index}</p>
                             </li>
                           )}
                         </Draggable>
@@ -86,7 +112,7 @@ const app:FC = () => {
             </DragDropContext>
         : null}
       </div> 
-      <button id='submitPhotos-button' type='button' onClick={updateRep}>ACTUALIZAR FOTOS</button>
+      <button id='submitPhotos-button' type='button' onClick={updateRep}>ACTUALIZAR ORDEN DE CAMARAS</button>
     </div>
   );
 };

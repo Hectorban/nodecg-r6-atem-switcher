@@ -44,11 +44,11 @@
     "compatibleRange": "^1.1.1",
     "dashboardPanels": [
       {
-        "name": "panel1",
+        "name": "atem switcher",
         "title": "Panel1",
-        "width": 2,
         "file": "panel.html",
-        "headerColor": "#525F78"
+        "headerColor": "#525F78",
+        "fullbleed": true
       },
       {
         "name": "panel2",
