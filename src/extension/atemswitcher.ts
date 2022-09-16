@@ -61,5 +61,5 @@ const initKeyListener = (AtemNumber: number, AtemClass: any) => {
   ioHook.start()
 }
 
-startAtem('192.168.100.240', 1)
-startAtem('169.254.152.19', 0)
+startAtem('192.168.0.140', 1)
+startAtem('192.168.0.141', 0)
