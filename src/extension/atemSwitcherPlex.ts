@@ -5,8 +5,8 @@ import * as nodecgApiContext from './utils/nodecg-api-context'
 const nodecg = nodecgApiContext.get()
 const keypresRefRep: any = nodecg.Replicant("keyPressRef")
 
-const ip1 = '192.168.0.140'
-const ip2 = '192.168.0.141'
+const ip1 = '192.168.0.122'
+const ip2 = '192.168.0.120'
 
 const numbersKeyRef = {
 	"49":  1,
