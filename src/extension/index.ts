@@ -17,6 +17,6 @@ const init = async () => {
 	nodecg.log.info("Initializing backend...")
 
 	// You can load your modules with require("") here
-	require("./atemMock")
+	require("./atemSwitcherPlex")
 	require("./referenceHandler")
 }
