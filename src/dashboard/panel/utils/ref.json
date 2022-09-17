@@ -1,45 +1,45 @@
 [
   [
     {
-      "name": "Gabo",
+      "name": "Jugador 1",
       "camera_index": 5
     },
     {
-      "name": "Connor",
+      "name": "Jugador 2",
       "camera_index": 4
     },
     {
-      "name": "Rauz",
+      "name": "Jugador 3",
       "camera_index": 3
     },
     {
-      "name": "Alell",
+      "name": "Jugador 4",
       "camera_index": 2
     },
     {
-      "name": "Hydre",
+      "name": "Jugador 5",
       "camera_index": 1
     }
   ],
   [
     {
-      "name": "Luxor",
+      "name": "Jugador 6",
       "camera_index": 10
     },
     {
-      "name": "Bope",
+      "name": "Jugador 7",
       "camera_index": 9
     },
     {
-      "name": "Morphed",
+      "name": "Jugador 8",
       "camera_index": 8
     },
     {
-      "name": "Paby",
+      "name": "Jugador 9",
       "camera_index": 7 
     },
     {
-      "name": "Pixie",
+      "name": "Jugador 10",
       "camera_index": 6
     }
   ]
